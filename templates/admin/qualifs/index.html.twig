@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Qualifs index{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+    <h1>Index des qualifications</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Qualification</th>
+                <th>Ecole</th>
+                <th>Obtenue le</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for qualif in qualifs %}
+            <tr>
+                <td>{{ qualif.name }}</td>
+                <td>{{ qualif.ecole }}</td>
+                <td>{{ qualif.createdAt ? qualif.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('qualifs_show', {'id': qualif.id}) }}">Voir la qualification</a>
+                    <a href="{{ path('qualifs_edit', {'id': qualif.id}) }}">Modifier la qualification</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucune qualication trouvée.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="btn btn-success"><a href="{{ path('qualifs_new') }}" style="color:white; text-decoration:none">Créer une qualification.</a></button>
+    <button class="btn btn-primary"><a href="{{ path('account_admin')}}" style="color:white; text-decoration:none">Retour à l'index de l'administration</a></button>
+</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Travaux index{% endblock %}
+
+{% block body %}
+<div class="container">
+    
+    <h1>Index des travaux</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Ville</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Créé le</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for chantier in travaux %}
+            <tr>
+                <td>{{ chantier.name }}</td>
+                <td>{{ chantier.ville }}</td>
+                <td>{{ chantier.description }}</td>
+                <td>{{ chantier.picture }}</td>
+                <td>{{ chantier.createdAt ? chantier.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('travaux_show', {'id': chantier.id}) }}">Voir le chantier</a>
+                    <a href="{{ path('travaux_edit', {'id': chantier.id}) }}">Modifier le chantier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucun chantier enregistré.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="btn btn-success"><a href="{{ path('travaux_new') }}" style="color:white; text-decoration:none" class="liens">Créer un nouveau chantier.</a></button>
+    <button class="btn btn-primary"><a href="{{ path('account_admin')}}" style="color:white; text-decoration:none">Retour à l'index de l'administration</a></button>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Qualifs{% endblock %}
+
+{% block body %}
+    <h1>Qualifs</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ qualif.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ qualif.name }}</td>
+            </tr>
+            <tr>
+                <th>Ecole</th>
+                <td>{{ qualif.ecole }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ qualif.createdAt ? qualif.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ qualif.slug }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('qualifs_index') }}">back to list</a>
+
+    <a href="{{ path('qualifs_edit', {'id': qualif.id}) }}">edit</a>
+
+    {{ include('qualifs/_delete_form.html.twig') }}
+{% endblock %}

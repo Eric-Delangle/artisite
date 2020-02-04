@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Travaux{% endblock %}
+
+{% block body %}
+    <h1>Travaux</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ travaux.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ travaux.name }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ travaux.ville }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ travaux.description }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ travaux.slug }}</td>
+            </tr>
+            <tr>
+                <th>Picture</th>
+                <td>{{ travaux.picture }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ travaux.createdAt ? travaux.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('travaux_index') }}">back to list</a>
+
+    <a href="{{ path('travaux_edit', {'id': travaux.id}) }}">edit</a>
+
+    {{ include('travaux/_delete_form.html.twig') }}
+{% endblock %}
