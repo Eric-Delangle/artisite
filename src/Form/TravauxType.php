@@ -25,6 +25,7 @@ class TravauxType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Travaux::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

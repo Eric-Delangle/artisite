@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Travaux{% endblock %}
+{% block title %}Nouveau chantier{% endblock %}
 
 {% block body %}
-    <h1>Create new Travaux</h1>
+<div class="container">
+    <h1>Créer un nouveau chantier:</h1>
 
-    {{ include('travaux/_form.html.twig') }}
+    {{ include('admin/travaux/_form.html.twig') }}
 
-    <a href="{{ path('travaux_index') }}">back to list</a>
+    <button class="btn btn-primary"><a href="{{ path('travaux_index') }}" style="color:white;">Retour à la liste</a></button>
+</div>
 {% endblock %}

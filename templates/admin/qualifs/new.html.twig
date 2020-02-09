@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Qualifs{% endblock %}
+{% block title %}Nouvelle qualification{% endblock %}
 
 {% block body %}
-    <h1>Create new Qualifs</h1>
+<div class="container">
+    <h1>Créer une nouvelle qualification</h1>
 
-    {{ include('qualifs/_form.html.twig') }}
+    {{ include('admin/qualifs/_form.html.twig') }}
 
-    <a href="{{ path('qualifs_index') }}">back to list</a>
+    <button class="btn btn-primary"><a href="{{ path('qualifs_index') }}" style="color:white;">Retour à la liste</a></button>
+</div>
 {% endblock %}

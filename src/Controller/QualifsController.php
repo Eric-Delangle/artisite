@@ -42,7 +42,7 @@ class QualifsController extends AbstractController
             return $this->redirectToRoute('qualifs_index');
         }
 
-        return $this->render('qualifs/new.html.twig', [
+        return $this->render('admin/qualifs/new.html.twig', [
             'qualif' => $qualif,
             'form' => $form->createView(),
         ]);

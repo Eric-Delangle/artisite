@@ -23,6 +23,7 @@ class QualifsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Qualifs::class,
+            'translation_domain' => 'forms',
         ]);
     }
 }

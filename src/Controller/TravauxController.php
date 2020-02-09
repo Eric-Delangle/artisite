@@ -42,7 +42,7 @@ class TravauxController extends AbstractController
             return $this->redirectToRoute('travaux_index');
         }
 
-        return $this->render('travaux/new.html.twig', [
+        return $this->render('admin/travaux/new.html.twig', [
             'travaux' => $travaux,
             'form' => $form->createView(),
         ]);
