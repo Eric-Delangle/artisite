@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Travaux;
 use App\Form\TravauxType;
+use Cocur\Slugify\Slugify;
 use App\Repository\TravauxRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/travaux")
@@ -31,10 +32,13 @@ class TravauxController extends AbstractController
     public function new(Request $request): Response
     {
         $travaux = new Travaux();
+        $slugify = new Slugify();
         $form = $this->createForm(TravauxType::class, $travaux);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugify->slugify($travaux->getName());
+            $travaux->setSlug($slug);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($travaux);
             $entityManager->flush();
@@ -51,10 +55,12 @@ class TravauxController extends AbstractController
     /**
      * @Route("/admin/{id}", name="travaux_show", methods={"GET"})
      */
-    public function show(Travaux $travaux): Response
+    public function show(Travaux $trav, TravauxRepository $travoRepo): Response
     {
-        return $this->render('travaux/show.html.twig', [
+        $travaux = $travoRepo->findAll();
+        return $this->render('admin/travaux/show.html.twig', [
             'travaux' => $travaux,
+            'trav' => $trav
         ]);
     }
 

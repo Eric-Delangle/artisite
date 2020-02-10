@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Travaux;
 use Symfony\Component\Form\AbstractType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class TravauxType extends AbstractType
 {
@@ -15,9 +17,11 @@ class TravauxType extends AbstractType
             ->add('name')
             ->add('ville')
             ->add('description')
-            ->add('slug')
-            ->add('picture')
-            ->add('createdAt')
+            ->add('pictureFile', VichFileType::class, [
+                'required' =>false,
+                'label' =>'Votre image'
+            ])
+            ->add('createdAt', DateType::class)
         ;
     }
 

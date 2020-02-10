@@ -2,18 +2,20 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\TravauxRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ChantiersController extends AbstractController
 {
     /**
      * @Route("/chantiers", name="chantiers")
      */
-    public function index()
+    public function index(TravauxRepository $travo)
     {
+        $travaux = $travo->findAll();
         return $this->render('chantiers/index.html.twig', [
-            'controller_name' => 'ChantiersController',
+            'travaux' => $travaux
         ]);
     }
 }

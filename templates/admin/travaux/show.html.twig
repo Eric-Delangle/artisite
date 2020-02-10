@@ -3,8 +3,9 @@
 {% block title %}Travaux{% endblock %}
 
 {% block body %}
+<div class="container">
     <h1>Travaux</h1>
-
+{% for travaux in trav %}
     <table class="table">
         <tbody>
             <tr>
@@ -37,10 +38,11 @@
             </tr>
         </tbody>
     </table>
+{% endfor %}
+    <a href="{{ path('travaux_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('travaux_index') }}">back to list</a>
+  {#  <a href="{{ path('travaux_edit', {'id': travaux.id}) }}">edit</a> #}
 
-    <a href="{{ path('travaux_edit', {'id': travaux.id}) }}">edit</a>
-
-    {{ include('travaux/_delete_form.html.twig') }}
+   {#  {{ include('admin/travaux/_delete_form.html.twig') }} #}
+</div>
 {% endblock %}

@@ -6,6 +6,7 @@ use App\Entity\Qualifs;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class QualifsType extends AbstractType
 {
@@ -14,8 +15,7 @@ class QualifsType extends AbstractType
         $builder
             ->add('name')
             ->add('ecole')
-            ->add('createdAt')
-            ->add('slug')
+            ->add('createdAt', DateType::class)
         ;
     }
 

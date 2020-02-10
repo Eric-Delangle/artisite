@@ -8,13 +8,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
+
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ArtisticWorkRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\TravauxRepository")
  * @Vich\Uploadable()
  */
 class Travaux
@@ -52,7 +49,7 @@ class Travaux
      private $picture;
 
        /**
-     * @Vich\UploadableField(mapping="images", fileNameProperty="picture")
+     * @Vich\UploadableField(mapping="travaux_img", fileNameProperty="picture")
      * @Assert\File(
      * maxSize="1000k",
      * maxSizeMessage="Le fichier excède 1000Ko.",

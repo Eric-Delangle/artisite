@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Qualifs;
 use App\Form\QualifsType;
+use Cocur\Slugify\Slugify;
 use App\Repository\QualifsRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/qualifs")
@@ -31,10 +32,13 @@ class QualifsController extends AbstractController
     public function new(Request $request): Response
     {
         $qualif = new Qualifs();
+        $slugify = new Slugify();
         $form = $this->createForm(QualifsType::class, $qualif);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugify->slugify($qualif->getName());
+            $qualif->setSlug($slug);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($qualif);
             $entityManager->flush();
@@ -67,6 +71,7 @@ class QualifsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+           
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('qualifs_index');
