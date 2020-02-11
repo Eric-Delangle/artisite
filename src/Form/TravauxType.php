@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
 class TravauxType extends AbstractType
 {
@@ -21,7 +21,7 @@ class TravauxType extends AbstractType
                 'required' =>false,
                 'label' =>'Votre image'
             ])
-            ->add('createdAt', DateType::class)
+            ->add('createdAt', BirthdayType::class)
         ;
     }
 

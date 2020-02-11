@@ -4,29 +4,29 @@
 
 {% block body %}
     <h1 style="text-align:center;">Mes differentes réalisations.</h1>
-    <div class="container">
+    <div class="container top center couleur">
     {% for trav in travaux %}
      <table class="table">
         <tbody>
             <tr>
-                <th>Nom</th>
+                <th>Nom:</th>
                 <td>{{ trav.name|title }}</td>
             </tr>
             <tr>
-                <th>Ville</th>
+                <th>Ville:</th>
                 <td>{{ trav.ville|title }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th>Description:</th>
                 <td>{{ trav.description }}</td>
             </tr>
             <tr>
-                <th>Photo</th>
+                <th>Photo:</th>
                 <td><p><img src=" {{ asset(['images/travaux/', trav.picture]|join) }} " class="" ></p></td>
             </tr>
             <tr>
-                <th>Réalisé le</th>
-                <td>{{ trav.createdAt ? trav.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Réalisé le:</th>
+                <td>{{ trav.createdAt ? trav.createdAt|date('Y-m-d') : '' }}</td>
             </tr>
         </tbody>
     </table>

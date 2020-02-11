@@ -1,4 +1,3 @@
-@import ('bootstrap.min.css');
 body {
     background-color: lightgray;
 }
@@ -9,4 +8,12 @@ body {
 
 footer {
     margin-bottom: 0;
+}
+
+.top {
+    margin-top: 30px;
+}
+
+.couleur {
+    background-color: rgb(196, 192, 187);
 }

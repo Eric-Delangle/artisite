@@ -4,15 +4,27 @@
 
 {% block body %}
     <h1 style="text-align:center;">Mes qualifications et mon experience professionnelle.</h1>
-    <div class="container center">
-   
-        {% for qualif in qual %}
-      
-            {{ qualif.name }}
-            {{ qualif.ecole }}
-           
-        {% endfor %}
-        
-    </div>
+
+        <div class="container top couleur">
+            {% for qualif in qual %}
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Nom:</th>
+                        <td>{{ qualif.name|title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Ecole:</th>
+                        <td>{{ qualif.ecole }}</td>
+                    </tr>
+                    <tr>
+                        <th>Obtenue le:</th>
+                        <td>{{ qualif.createdAt ? qualif.createdAt|date('Y-m-d') : '' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            {% endfor %}
+        </div>
     
 {% endblock %}

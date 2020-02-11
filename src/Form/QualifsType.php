@@ -6,7 +6,7 @@ use App\Entity\Qualifs;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
 class QualifsType extends AbstractType
 {
@@ -15,7 +15,9 @@ class QualifsType extends AbstractType
         $builder
             ->add('name')
             ->add('ecole')
-            ->add('createdAt', DateType::class)
+            ->add('createdAt', BirthdayType::class, [
+                'label' => 'Obtenue le'
+            ])
         ;
     }
 
