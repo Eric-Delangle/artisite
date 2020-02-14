@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MessageController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <h1 style="text-align:center;">N'hésitez pas si vous avez des questions.</h1>
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-success">Envoyer</button>
+        {{ form_end(form) }}
+{% endblock %}
