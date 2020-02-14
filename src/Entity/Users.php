@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsersRepository")
  */
@@ -43,12 +44,11 @@ class Users implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit contenir au minimum huit caractères")
-     * @Assert\EqualTo(propertyPath="password_verify", message="Vos mots de passe ne sont pas identiques")
      */
     private $password;
 
     /**
-     *  @Assert\EqualTo(propertyPath="password", message="Vos mots de passe ne sont pas identiques")
+     * @Assert\EqualTo(propertyPath="password", message="Vos mots de passe ne sont pas identiques")
      * @var string|null
      */
      public $password_verify;

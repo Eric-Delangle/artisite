@@ -32,14 +32,41 @@ class Estimation
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime")
      */
-    private $slug;
+    private $startedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="estimations")
+     * @ORM\Column(type="string", length=255)
      */
-    private $user;
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastName;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $rue;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $codePostal;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
+
+
 
     public function getId(): ?int
     {
@@ -82,26 +109,90 @@ class Estimation
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getStartedAt(): ?\DateTimeInterface
     {
-        return $this->slug;
+        return $this->startedAt;
     }
 
-    public function setSlug(string $slug): self
+    public function setStartedAt(\DateTimeInterface $startedAt): self
     {
-        $this->slug = $slug;
+        $this->startedAt = $startedAt;
 
         return $this;
     }
 
-    public function getUser(): ?Users
-    {
-        return $this->user;
+    public function __toString() {
+        return (string) $this->getStartedAt();
     }
 
-    public function setUser(?Users $user): self
+    public function getFirstName(): ?string
     {
-        $this->user = $user;
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getRue(): ?string
+    {
+        return $this->rue;
+    }
+
+    public function setRue(string $rue): self
+    {
+        $this->rue = $rue;
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?string
+    {
+        return $this->codePostal;
+    }
+
+    public function setCodePostal(string $codePostal): self
+    {
+        $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
 
         return $this;
     }

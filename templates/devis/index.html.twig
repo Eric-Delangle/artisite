@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %} Devis {% endblock %}
-
+{% form_theme form 'bootstrap_4_layout.html.twig' %} 
 {% block body %}
-    <h1 style="text-align:center;">Faites une estimation de vos travaux.</h1>
+<div class="container">
+    <h1 style="text-align:center;">Demander une estimation de vos travaux.</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-success">Valider</button>
+    {{ form_end(form) }}
+</div>
 {% endblock %}

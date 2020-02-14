@@ -1,9 +1,9 @@
 {% extends 'base.html.twig'%}
 {% block title %} Votre interface de gestion {% endblock %}
 {% block body %}
-<div class="container">
+<div class="container top">
     <h1>Cette page va vous permettre de gérer votre site</h1>
-    <div class="row">
+    <div class="row top">
         <div class="col md-6">
            <button class="btn btn-success"><a href="{{ path('travaux_index') }}" style="color:white;">Vos travaux</a></button>
         </div>
@@ -11,5 +11,66 @@
             <button class="btn btn-success"><a href="{{ path('qualifs_index') }}" style="color:white;">Vos qualifications</a></button>
         </div>
     </div>
+</div>
+<div class="container top">
+    <h2>Vos demandes de devis:</h2>
+
+    {% for devis in estimations %}
+        <table class="table couleur">
+                <tbody>
+                    <tr>
+                        <th>Prénom</th>
+                        <td>{{ devis.firstName|title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ devis.lastName|title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Rue</th>
+                        <td>{{ devis.rue|title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Code postal</th>
+                        <td>{{ devis.codePostal }}</td>
+                    </tr>
+                    <tr>
+                        <th>Ville</th>
+                        <td>{{ devis.ville|title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Quelle pièce ?</th>
+                        <td>{{ devis.piece|title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Surface (en M2):</th>
+                        <td>{{ devis.surface }}</td>
+                    </tr>
+                     <tr>
+                        <th>Description:</th>
+                        <td>{{ devis.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>{{ devis.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>A réaliser le:</th>
+                        <td>{{ devis.startedAt ? devis.startedAt|date('d-m-Y') : '' }}</td>
+                    </tr>
+                </tbody>
+                <hr>
+            </table>
+
+                <form method="post" action="{{ path('devis_delete', {'id': devis.id}) }}" onsubmit="return confirm('Etes vous sur(e) de vouloir supprimer ce devis ?');">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ devis.id) }}">
+                    <button class="btn btn-danger">Supprimer ce devis</button>
+                </form>
+
+            {% else %}
+            <p>Vous n'avez aucune demande de devis en cours.</p>
+    {% endfor %}
+    
 </div>
 {% endblock %}

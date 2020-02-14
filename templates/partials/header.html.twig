@@ -32,6 +32,9 @@
                  <li class="nav-item">
                     <a class="nav-link" href="{{ path('account_admin') }}" id="admin"><i class=""></i> Administration</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('account_profil') }}" id="profil"><i class=""></i> Modifier votre profil</a>
+                </li>
             </ul>
         </div>
 </nav>
@@ -45,17 +48,20 @@
             <script>document.getElementById('connexion').style.display ='none';</script>
             <script>document.getElementById('deconnexion').style.display ='block';</script>
             <script>document.getElementById('admin').style.display ='none';</script> 
+            <script>document.getElementById('profil').style.display ='none';</script> 
           
         {% else %}
             <script>document.getElementById('inscription').style.display ='block';</script>
             <script>document.getElementById('connexion').style.display ='block';</script>
             <script>document.getElementById('admin').style.display ='none';</script> 
             <script>document.getElementById('deconnexion').style.display ='none';</script>
+            <script>document.getElementById('profil').style.display ='none';</script>
 
 {% endif %}
 
 {% if is_granted('ROLE_ADMIN') %}
     <script>document.getElementById('admin').style.display ='block';</script>
+    <script>document.getElementById('profil').style.display ='block';</script>
 {% endif %}
   
         
