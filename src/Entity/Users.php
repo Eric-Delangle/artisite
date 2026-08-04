@@ -83,6 +83,11 @@ class Users implements UserInterface
         return $this->id;
     }
 
+    public function getUserIdentifier(): string
+    {
+        return $this->email; // remplacez par le même champ que celui utilisé dans getUsername()
+    }
+
     public function getFirstName(): ?string
     {
         return $this->firstName;
@@ -199,7 +204,7 @@ class Users implements UserInterface
     }
 
     // modifier la méthode getRoles
-    public function getRoles() {
+    public function getRoles(): array {
         if ($this->niveau == 2)
             return ['ROLE_ADMIN'];
         elseif ($this->niveau == 1)
@@ -224,7 +229,7 @@ class Users implements UserInterface
         return $this;
     }
 
-    public function eraseCredentials() {}
+    public function eraseCredentials(): void {}
     public function getUserName() {
         return $this->email;
     }

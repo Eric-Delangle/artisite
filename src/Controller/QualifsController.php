@@ -8,16 +8,13 @@ use App\Repository\QualifsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
-/**
- * @Route("/qualifs")
- */
+#[Route('/qualifs')]
 class QualifsController extends AbstractController
 {
-    /**
-     * @Route("/admin", name="qualifs_index", methods={"GET"})
-     */
+    
+    #[Route('/admin', name: 'qualifs_index', methods: ['GET'])]
     public function index(QualifsRepository $qualifsRepository): Response
     {
         return $this->render('admin/qualifs/index.html.twig', [
@@ -25,9 +22,7 @@ class QualifsController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="qualifs_new", methods={"GET","POST"})
-     */
+    #[Route('/new', name: 'qualifs_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $qualif = new Qualifs();
@@ -48,9 +43,7 @@ class QualifsController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="qualifs_show", methods={"GET"})
-     */
+    #[Route('/{id}', name: 'qualifs_show', methods: ['GET'])]
     public function show(Qualifs $qualif): Response
     {
         return $this->render('qualifs/show.html.twig', [
@@ -58,9 +51,7 @@ class QualifsController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="qualifs_edit", methods={"GET","POST"})
-     */
+    #[Route('/{id}/edit', name: 'qualifs_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Qualifs $qualif): Response
     {
         $form = $this->createForm(QualifsType::class, $qualif);
@@ -78,9 +69,7 @@ class QualifsController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="qualifs_delete", methods={"DELETE"})
-     */
+    #[Route('/{id}', name: 'qualifs_delete', methods: ['DELETE'])]
     public function delete(Request $request, Qualifs $qualif): Response
     {
         if ($this->isCsrfTokenValid('delete'.$qualif->getId(), $request->request->get('_token'))) {

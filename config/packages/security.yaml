@@ -1,17 +1,13 @@
 security:
-    encoders:
+    password_hashers:
         App\Entity\Users:
-            algorithm: bcrypt
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+            algorithm: auto
 
     role_hierarchy:
-        ROLE_USER: ROLE_USER
-        ROLE_ADMIN: ROLE_ADMIN
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
-
     providers:
-        in_database: 
+        in_database:
             entity:
                 class: App\Entity\Users
                 property: email
@@ -22,9 +18,9 @@ security:
             security: false
 
         main:
-            anonymous: true
+            lazy: true
             provider: in_database
-        
+
             form_login:
                 login_path: account_login
                 check_path: account_login
@@ -34,5 +30,4 @@ security:
                 target: home
 
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }     
-            # https://symfony.com/doc/current/security/form_login_setup.html
+        - { path: ^/admin, roles: ROLE_ADMIN }

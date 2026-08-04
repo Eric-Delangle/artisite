@@ -3,13 +3,11 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class DevisController extends AbstractController
 {
-    /**
-     * @Route("/devis", name="devis")
-     */
+    #[Route('/devis', name: 'devis')]
     public function index()
     {
         return $this->render('devis/index.html.twig', [

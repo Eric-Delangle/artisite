@@ -8,19 +8,15 @@ use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AccountController extends AbstractController
 {
 
-   /**
-     * Permet d'afficher le formulaire de création de compte
-     * @Route("/registration", name="account_registration")
-     * @return Response
-     */
-    public function registration(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
+    #[Route('/registration', name: 'account_registration')]
+    public function registration(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $passwordHasher)
     {
         $user = new Users();
         $form = $this->createForm(RegistrationType::class, $user);
@@ -38,7 +34,7 @@ class AccountController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
 
             $slugify = new Slugify();
-            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $hash = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($hash);
             $slug = $slugify->slugify($user->getFirstName().''.$user->getLastName());
             $user->setSlug($slug);
@@ -55,31 +51,19 @@ class AccountController extends AbstractController
         ]);
     }
    
-    /**
-     * Permet d'afficher le formulaire de connexion
-     * @Route("/login", name="account_login")
-     * @return Response
-     */
+    #[Route('/login', name: 'account_login')]
     public function login()
     {
         return $this->render('account/login.html.twig');
     }
 
-    /**
-     * Permet de se déconnecter
-     * @Route("/logout", name="account_logout")
-     * @return void
-     */
+    #[Route('/logout', name: 'account_logout')]
     public function logout()
     {
         
     }
 
-      /**
-     * Permet de se connecter a l'interface d'administration
-     * @Route("/admin", name="account_admin")
-     * @return Response
-     */
+     #[Route('/admin', name: 'account_admin')]
      public function admin()
      {
          return $this->render('admin/index.html.twig');

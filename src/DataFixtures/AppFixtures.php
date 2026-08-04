@@ -6,19 +6,19 @@ use Faker;
 use App\Entity\Users;
 use Cocur\Slugify\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
 
     private $encoder;
-    public function __construct(UserPasswordEncoderInterface $encoder){
+    public function __construct(UserPasswordHasherInterface $passwordHasher){
         $this->encoder = $encoder;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $faker =  Faker\Factory::create('fr_FR');
         $slugify = new Slugify();
@@ -26,7 +26,7 @@ class AppFixtures extends Fixture
         for ($h = 1; $h <= 5; $h++) {
                 
             $user = new Users();
-            $password = $this->encoder->encodePassword($user, 'password');
+            $password = $this->passwordHasher->hashPassword($user, $plainPassword);
 
             $user->setFirstName($faker->firstNameMale());
             $user->setLastName($faker->lastName());

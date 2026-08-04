@@ -8,16 +8,12 @@ use App\Repository\TravauxRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
-/**
- * @Route("/travaux")
- */
+#[Route('/travaux')]
 class TravauxController extends AbstractController
 {
-    /**
-     * @Route("/admin", name="travaux_index", methods={"GET"})
-     */
+    #[Route('/admin', name: 'travaux_index', methods: ['GET'])]
     public function index(TravauxRepository $travauxRepository): Response
     {
         return $this->render('admin/travaux/index.html.twig', [
@@ -25,9 +21,7 @@ class TravauxController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin/new", name="travaux_new", methods={"GET","POST"})
-     */
+    #[Route('/admin/new', name: 'travaux_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $travaux = new Travaux();
@@ -48,9 +42,7 @@ class TravauxController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin/{id}", name="travaux_show", methods={"GET"})
-     */
+    #[Route('/admin/{id}', name: 'travaux_show', methods: ['GET'])]
     public function show(Travaux $travaux): Response
     {
         return $this->render('travaux/show.html.twig', [
@@ -58,9 +50,7 @@ class TravauxController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin/{id}/edit", name="travaux_edit", methods={"GET","POST"})
-     */
+    #[Route('/admin/{id}/edit', name: 'travaux_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Travaux $travaux): Response
     {
         $form = $this->createForm(TravauxType::class, $travaux);
@@ -78,9 +68,7 @@ class TravauxController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin/{id}", name="travaux_delete", methods={"DELETE"})
-     */
+    #[Route('/admin/{id}', name: 'travaux_delete', methods: ['DELETE'])]
     public function delete(Request $request, Travaux $travaux): Response
     {
         if ($this->isCsrfTokenValid('delete'.$travaux->getId(), $request->request->get('_token'))) {
